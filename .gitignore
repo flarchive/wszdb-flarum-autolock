@@ -1,0 +1,29 @@
+# 依赖项
+node_modules/
+vendor/
+
+
+# 包管理文件
+composer.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编辑器/IDE配置
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 环境变量和配置文件
+.env
+.env.local
+.env.*.local
+
+# 测试相关
+phpunit.xml
+coverage/
+
+# 其他临时文件
+main

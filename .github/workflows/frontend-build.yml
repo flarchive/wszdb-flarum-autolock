@@ -1,0 +1,74 @@
+name: Build Frontend Assets
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'js/src/**'
+      - 'package.json'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout extension
+      uses: actions/checkout@v3
+      with:
+        path: extension
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: dom, curl, libxml, mbstring, zip
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Create Flarum environment
+      run: |
+        composer create-project flarum/flarum:^1.8 flarum --no-dev --no-interaction
+        cd flarum
+        mkdir -p extensions/wszdb-autolock
+        
+    - name: Copy extension to Flarum
+      run: |
+        cp -r extension/* flarum/extensions/wszdb-autolock/
+        
+    - name: Build extension
+      run: |
+        cd flarum/extensions/wszdb-autolock
+        npm install
+        npm run build
+        
+    - name: Copy compiled assets back
+      run: |
+        cp flarum/extensions/wszdb-autolock/js/dist/* extension/js/dist/
+        
+    - name: Check for changes
+      id: check_changes
+      run: |
+        cd extension
+        git add js/dist/
+        if git diff --cached --quiet; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+          echo "No changes in compiled assets"
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "Compiled assets updated"
+        fi
+    
+    - name: Commit and push if changed
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        cd extension
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "build: Compile frontend assets [skip ci]"
+        git push
