@@ -2,13 +2,15 @@
 
 > **Read-only archive of released versions of wszdb/flarum-autolock.** Not for installation: use [Packagist](https://packagist.org/packages/wszdb/flarum-autolock) or the [upstream repository](https://github.com/wszdb/flarum-autolock).
 
-**0** versions archived · Latest: [`v2.4`](https://github.com/flarchive/wszdb-flarum-autolock/tree/archive/v2.4) · License: `MIT` · Flarum: `^1.8.0`
+**3** versions archived · Latest: [`v2.4`](https://github.com/flarchive/wszdb-flarum-autolock/tree/archive/v2.4) · License: `MIT` · Flarum: `^1.8.0`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| — | — | — | — |
+| `v0.1` | 2025-10-07 | `^1.0` | [Browse](https://github.com/flarchive/wszdb-flarum-autolock/tree/archive/v0.1) |
+| `v2.0.0` | 2025-10-07 | `^1.8.0` | [Browse](https://github.com/flarchive/wszdb-flarum-autolock/tree/archive/v2.0.0) |
+| `v2.4` | 2025-10-12 | `^1.8.0` | [Browse](https://github.com/flarchive/wszdb-flarum-autolock/tree/archive/v2.4) |
 
 Catalog entry: [packages/wszdb-flarum-autolock.json](https://github.com/flarchive/archive-index/blob/main/packages/wszdb-flarum-autolock.json)
 
